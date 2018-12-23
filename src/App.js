@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import data from "./personality_test";
-import Questions from "./Questions/Questions";
+import Questions from "./components/Questions/Questions";
 
 class App extends Component {
   constructor(props) {
