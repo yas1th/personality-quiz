@@ -7,17 +7,24 @@ export default class Questions extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      questionNum: 0
+      questionNum: 0,
+      disableNextBtn: false
     };
   }
+  componentWillReceiveProps = nextProps => {
+    if (this.props !== nextProps) {
+      this.setState({ questionNum: 0, disableNextBtn: false });
+    }
+  };
   increaseQuestionNumber = () => {
     let nextQuestionNum = this.state.questionNum + 1;
     this.setState({ questionNum: nextQuestionNum });
+    if (nextQuestionNum > this.props.questions.length - 1) {
+      this.setState({ questionNum: 0, disableNextBtn: true });
+      this.props.nextSection();
+    }
   };
-  resetQuestionNumber = () => {
-    this.setState({ questionNum: 0 });
-    // document.getElementById("next").setAttribute("disabled", true);
-  };
+  // resetQuestionNumber = () => {};
   render() {
     const { questions } = this.props;
     return (
@@ -29,17 +36,20 @@ export default class Questions extends React.Component {
             "single_choice" ? (
               <RadioButtonOptions
                 question={questions[this.state.questionNum]}
-                // nextQuestion={this.increaseQuestionNumber}
               />
             ) : (
               "multiple"
             )}
-            <button id="next" onClick={e => this.increaseQuestionNumber()}>
+            <button
+              id="next"
+              disabled={this.state.disableNextBtn}
+              onClick={e => this.increaseQuestionNumber()}
+            >
               Next
             </button>
           </div>
         ) : (
-          this.resetQuestionNumber()
+          ""
         )}
       </div>
     );

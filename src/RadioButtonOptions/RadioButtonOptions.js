@@ -8,6 +8,11 @@ export default class RadioButtonOptions extends React.Component {
       selectedOption: ""
     };
   }
+  componentWillReceiveProps = nextProps => {
+    if (this.props !== nextProps) {
+      this.setState({ selectedOption: "" });
+    }
+  };
   handleChangeOption = changeEvent => {
     this.setState({
       selectedOption: changeEvent.target.value
@@ -25,7 +30,6 @@ export default class RadioButtonOptions extends React.Component {
                 value={option}
                 onChange={e => {
                   this.handleChangeOption(e);
-                  //   this.props.nextQuestion();
                 }}
                 checked={this.state.selectedOption === option ? true : false}
               />
