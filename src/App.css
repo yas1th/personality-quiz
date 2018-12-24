@@ -26,8 +26,12 @@ body {
 
 .categories-list li {
   list-style: none;
-  cursor: pointer;
   margin-bottom: 10px;
+  cursor: not-allowed;
+}
+
+.categories-list li span {
+  cursor: pointer;
 }
 
 .right-side-content {

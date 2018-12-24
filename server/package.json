@@ -1,0 +1,26 @@
+{
+  "name": "personalityquiz",
+  "version": "1.0.0",
+  "description": "Serving the personality quiz questions through rest api",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yas1th/personality-quiz.git"
+  },
+  "keywords": [
+    "personalityQuiz"
+  ],
+  "author": "yaswanth",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yas1th/personality-quiz/issues"
+  },
+  "homepage": "https://github.com/yas1th/personality-quiz#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4"
+  }
+}

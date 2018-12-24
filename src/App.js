@@ -48,7 +48,7 @@ class App extends Component {
                     key={category}
                     onClick={e => this.changeCategory(category)}
                   >
-                    {category}
+                    <span>{category}</span>
                   </li>
                 );
               })}
