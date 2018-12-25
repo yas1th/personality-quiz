@@ -2,6 +2,6 @@ import axios from "axios";
 
 export const URL = "/api/";
 
-const API = axios.create({
+export const API = axios.create({
   baseURL: URL
 });

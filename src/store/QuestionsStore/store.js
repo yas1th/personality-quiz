@@ -1,4 +1,4 @@
 export const questionsStore = {
-    quizData: {},
-    isLoading: true
-}
+  questionsData: {},
+  isLoading: true
+};
