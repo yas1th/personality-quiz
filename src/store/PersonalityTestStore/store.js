@@ -1,4 +1,4 @@
-export const questionsStore = {
+export const personalityTestStore = {
   categories: [],
   questions: [],
   isLoading: true

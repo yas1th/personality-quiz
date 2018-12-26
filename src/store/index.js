@@ -1,4 +1,4 @@
-import { questionsStore } from "./QuestionsStore/store";
+import { personalityTestStore } from "./QuestionsStore/store";
 import * as questionsReducers from "./QuestionsStore/reducers";
 import { questionsSagas } from "./QuestionsStore/sagas";
 import { all } from "redux-saga/effects";
@@ -6,7 +6,7 @@ import createSagaMiddleware from "redux-saga";
 import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 
 const initialState = {
-  ...questionsStore
+  ...personalityTestStore
 };
 
 const reducers = {

@@ -1,8 +1,8 @@
-const URL = "mongodb://localhost:27017/exercise";
+const URL = "mongodb://localhost:27017/personalityTest";
 const mongoose = require("mongoose");
 const categoryModel = require("./models/categories");
 const questionModel = require("./models/questions");
-const personalityQuizData = require("./personality_test");
+const personalityTestData = require("./data/personality_test");
 
 mongoose.connect(
   URL,
@@ -13,7 +13,7 @@ mongoose.connect(
   }
 );
 
-const categories = personalityQuizData.categories;
+const categories = personalityTestData.categories;
 categories.map(category => {
   const categoryCollection = new categoryModel({
     categoryName: category
@@ -21,7 +21,7 @@ categories.map(category => {
   categoryCollection.save();
 });
 
-const questions = personalityQuizData.questions;
+const questions = personalityTestData.questions;
 questions.map(question => {
   const questionCollection = new questionModel({
     question: question.question,

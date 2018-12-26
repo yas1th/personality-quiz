@@ -10,7 +10,6 @@ export default class Questions extends React.Component {
       questionNum: 0,
       disableNextBtn: false
     };
-    this.increaseQuestionNumber = this.increaseQuestionNumber.bind(this);
   }
 
   componentWillReceiveProps = nextProps => {

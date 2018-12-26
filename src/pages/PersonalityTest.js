@@ -3,7 +3,8 @@ import "./PersonalityTest.css";
 import Questions from "../components/Questions/Questions";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { personalityTestActionCreators } from "../store/QuestionsStore/actions";
+import { personalityTestActionCreators } from "../store/PersonalityTestStore/actions";
+import LoadingBar from "../components/LoadingBar/LoadingBar";
 
 class _PersonalityTest extends Component {
   constructor(props) {
@@ -35,7 +36,7 @@ class _PersonalityTest extends Component {
     const { categories, questions } = this.props;
     return (
       <div>
-        {categories && questions ? (
+        {categories.length > 0 && questions.length > 0 ? (
           <div className="wrapper">
             {/* left menu Starts here */}
             <div className="left-menu pquiz-col-4">
@@ -74,7 +75,7 @@ class _PersonalityTest extends Component {
             {/* Right Side Content Ends here */}
           </div>
         ) : (
-          "Loading..."
+          <LoadingBar />
         )}
       </div>
     );

@@ -32,11 +32,11 @@ export default class Question extends React.Component {
 
   handleChangeOption = index => {
     this.setState({
-      selectedOption: index
+      selectedOption: index,
+      errorMessage: null
     });
   };
   render() {
-    console.log(this.state.selectedOption);
     const { question } = this.props;
     return (
       <div>
