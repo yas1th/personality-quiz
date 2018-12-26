@@ -1,4 +1,5 @@
 export const questionsStore = {
-  questionsData: {},
+  categories: [],
+  questions: [],
   isLoading: true
 };

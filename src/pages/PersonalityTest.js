@@ -3,33 +3,32 @@ import "./PersonalityTest.css";
 import Questions from "../components/Questions/Questions";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { questionActionCreators } from "../store/QuestionsStore/actions";
+import { personalityTestActionCreators } from "../store/QuestionsStore/actions";
 
 class _PersonalityTest extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      category: "hard_fact",
       categoryIndex: 0
     };
   }
   componentDidMount() {
+    this.props.fetchCategories();
     this.props.fetchQuestions();
   }
-  changeCategory = curCategory => {
+  changeCategory = index => {
     this.setState({
-      category: curCategory
+      categoryIndex: index
     });
   };
   nextcategory = () => {
     let curCategoryIndex = this.state.categoryIndex + 1;
     if (curCategoryIndex <= this.props.categories.length - 1) {
       this.setState({
-        categoryIndex: curCategoryIndex,
-        category: this.props.categories[curCategoryIndex]
+        categoryIndex: curCategoryIndex
       });
     } else {
-      this.setState({ categoryIndex: 0, category: "hard_fact" });
+      this.setState({ categoryIndex: 0 });
     }
   };
   render() {
@@ -41,17 +40,20 @@ class _PersonalityTest extends Component {
             {/* left menu Starts here */}
             <div className="left-menu pquiz-col-4">
               <ul className="categories-list">
-                {categories.map(category => {
-                  let curCategory = this.state.category;
+                {categories.map((category, index) => {
+                  let curCategory =
+                    categories[this.state.categoryIndex].categoryName;
                   return (
                     <li
                       className={
-                        category === curCategory ? "activeTab" : "inactiveTab"
+                        category.categoryName === curCategory
+                          ? "activeTab"
+                          : "inactiveTab"
                       }
-                      key={category}
-                      onClick={e => this.changeCategory(category)}
+                      key={category.categoryName}
+                      onClick={e => this.changeCategory(index)}
                     >
-                      <span>{category}</span>
+                      <span>{category.categoryName}</span>
                     </li>
                   );
                 })}
@@ -62,7 +64,9 @@ class _PersonalityTest extends Component {
             <div className="right-side-content pquiz-col-8">
               <Questions
                 questions={questions.filter(
-                  question => question.category === this.state.category
+                  question =>
+                    question.category ===
+                    categories[this.state.categoryIndex].categoryName
                 )}
                 nextSection={this.nextcategory}
               />
@@ -70,7 +74,7 @@ class _PersonalityTest extends Component {
             {/* Right Side Content Ends here */}
           </div>
         ) : (
-          ""
+          "Loading..."
         )}
       </div>
     );
@@ -78,15 +82,15 @@ class _PersonalityTest extends Component {
 }
 
 const mapStateToProps = state => {
-  const { questionsData } = state;
+  const { categories, questions } = state;
   return {
-    categories: questionsData.categories,
-    questions: questionsData.questions
+    categories,
+    questions
   };
 };
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ ...questionActionCreators }, dispatch);
+  bindActionCreators({ ...personalityTestActionCreators }, dispatch);
 
 export const PersonalityTest = connect(
   mapStateToProps,

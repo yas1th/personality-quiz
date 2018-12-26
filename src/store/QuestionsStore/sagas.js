@@ -1,24 +1,52 @@
 import { call, put, takeEvery } from "redux-saga/effects";
-import { questionsActions } from "./actions";
+import { personalityTestActions } from "./actions";
 import { API } from "../../Services/Api";
 
-function* watchPersonalityQuizQuestions() {
+function* watchPersonalityTestQuestions() {
   yield takeEvery(
-    questionsActions.FETCH_QUESTIONS,
-    getPersonalityQuizQuestions
+    personalityTestActions.FETCH_QUESTIONS,
+    getPersonalityTestQuestions
   );
 }
 
-function* getPersonalityQuizQuestions(action) {
+function* getPersonalityTestQuestions(action) {
   try {
     const response = yield call(API.get, `questions`);
     yield put({
-      type: questionsActions.FETCH_QUESTIONS_SUCCESS,
+      type: personalityTestActions.FETCH_QUESTIONS_SUCCESS,
       payload: response.data
     });
   } catch (error) {
-    yield put({ type: questionsActions.FETCH_QUESTIONS_ERROR, payload: error });
+    yield put({
+      type: personalityTestActions.FETCH_QUESTIONS_ERROR,
+      payload: error
+    });
   }
 }
 
-export const questionsSagas = [watchPersonalityQuizQuestions()];
+function* watchPersonalityTestCtegories() {
+  yield takeEvery(
+    personalityTestActions.FETCH_CATEGORIES,
+    getPersonalityTestCategories
+  );
+}
+
+function* getPersonalityTestCategories(action) {
+  try {
+    const response = yield call(API.get, `categories`);
+    yield put({
+      type: personalityTestActions.FETCH_CATEGORIES_SUCCESS,
+      payload: response.data
+    });
+  } catch (error) {
+    yield put({
+      type: personalityTestActions.FETCH_CATEGORIES_ERROR,
+      payload: error
+    });
+  }
+}
+
+export const questionsSagas = [
+  watchPersonalityTestQuestions(),
+  watchPersonalityTestCtegories()
+];
