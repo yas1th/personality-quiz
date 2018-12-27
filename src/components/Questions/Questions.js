@@ -17,9 +17,9 @@ export default class Questions extends React.Component {
   };
 
   componentWillReceiveProps = nextProps => {
-    if (this.props !== nextProps) {
+    if (nextProps) {
       this.setState({
-        questionNum: this.props.questionNum ? this.props.questionNum : 0,
+        questionNum: nextProps.questionNum ? nextProps.questionNum : 0,
         disableNextBtn: false
       });
     }

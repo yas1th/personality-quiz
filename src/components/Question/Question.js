@@ -6,7 +6,8 @@ export default class Question extends React.Component {
     super(props);
     this.state = {
       selectedOption: -1,
-      errorMessage: null
+      errorMessage: null,
+      answer: ""
     };
   }
 
@@ -30,14 +31,17 @@ export default class Question extends React.Component {
     }
     this.props.updateAnswer({
       questionId: this.props.question._id,
-      answerIndex: this.state.selectedOption
+      answerIndex: this.state.selectedOption,
+      question: this.props.question.question,
+      answer: this.state.answer
     });
   };
 
-  handleChangeOption = index => {
+  handleChangeOption = (index, value) => {
     this.setState({
       selectedOption: index,
-      errorMessage: null
+      errorMessage: null,
+      answer: value
     });
   };
   render() {
@@ -52,7 +56,7 @@ export default class Question extends React.Component {
                 type="radio"
                 value={option}
                 onChange={e => {
-                  this.handleChangeOption(index);
+                  this.handleChangeOption(index, e.target.value);
                 }}
                 checked={this.state.selectedOption === index ? true : false}
               />
