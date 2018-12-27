@@ -28,6 +28,10 @@ export default class Question extends React.Component {
         errorMessage: "you must answer this question"
       });
     }
+    this.props.updateAnswer({
+      questionId: this.props.question._id,
+      answerIndex: this.state.selectedOption
+    });
   };
 
   handleChangeOption = index => {

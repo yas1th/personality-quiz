@@ -12,12 +12,18 @@ class _PersonalityTest extends Component {
     this.state = {
       categoryIndex: 0
     };
+    this.child = React.createRef();
   }
   componentDidMount() {
     this.props.fetchCategories();
     this.props.fetchQuestions();
   }
-  changeCategory = index => {
+  changeCategory = (index, prevCategory) => {
+    const prevCategoryQstnIndex = this.child.current.getQstnNumber();
+    this.props.updateCurrentCategoryQuestionIndex({
+      categoryName: prevCategory,
+      questionNum: prevCategoryQstnIndex
+    });
     this.setState({
       categoryIndex: index
     });
@@ -34,6 +40,10 @@ class _PersonalityTest extends Component {
   };
   render() {
     const { categories, questions } = this.props;
+    let categoryName;
+    if (categories.length > 0) {
+      categoryName = categories[this.state.categoryIndex].categoryName;
+    }
     return (
       <div>
         {categories.length > 0 && questions.length > 0 ? (
@@ -52,7 +62,7 @@ class _PersonalityTest extends Component {
                           : "inactiveTab"
                       }
                       key={category.categoryName}
-                      onClick={e => this.changeCategory(index)}
+                      onClick={e => this.changeCategory(index, curCategory)}
                     >
                       <span>{category.categoryName}</span>
                     </li>
@@ -64,12 +74,17 @@ class _PersonalityTest extends Component {
             {/* Right side content starts here */}
             <div className="right-side-content pquiz-col-8">
               <Questions
+                ref={this.child}
                 questions={questions.filter(
-                  question =>
-                    question.category ===
-                    categories[this.state.categoryIndex].categoryName
+                  question => question.category === categoryName
                 )}
                 nextSection={this.nextcategory}
+                updateAnswer={this.props.updateAnswer}
+                questionNum={
+                  this.props.categoryCurrentQuestionIndex[categoryName]
+                    ? this.props.categoryCurrentQuestionIndex[categoryName]
+                    : 0
+                }
               />
             </div>
             {/* Right Side Content Ends here */}
@@ -83,10 +98,11 @@ class _PersonalityTest extends Component {
 }
 
 const mapStateToProps = state => {
-  const { categories, questions } = state;
+  const { categories, questions, categoryCurrentQuestionIndex } = state;
   return {
     categories,
-    questions
+    questions,
+    categoryCurrentQuestionIndex
   };
 };
 

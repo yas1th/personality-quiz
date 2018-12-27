@@ -4,7 +4,9 @@ export const personalityTestActions = {
   FETCH_QUESTIONS_ERROR: "FETCH_QUESTIONS_ERROR",
   FETCH_CATEGORIES: "FETCH_CATEGORIES",
   FETCH_CATEGORIES_SUCCESS: "FETCH_CATEGORIES_SUCCESS",
-  FETCH_CATEGORIES_ERROR: "FETCH_CATEGORIES_ERROR"
+  FETCH_CATEGORIES_ERROR: "FETCH_CATEGORIES_ERROR",
+  UPDATE_ANSWER: "UPDATE_ANSWER",
+  UPDATE_CURRENT_CATEGORY_INDEX: "UPDATE_CURRENT_CATEGORY_QUESTION_INDEX"
 };
 
 export const personalityTestActionCreators = {
@@ -24,6 +26,14 @@ export const personalityTestActionCreators = {
   }),
   fetchCategoriesError: data => ({
     type: personalityTestActions.FETCH_CATEGORIES_ERROR,
+    payload: data
+  }),
+  updateAnswer: data => ({
+    type: personalityTestActions.UPDATE_ANSWER,
+    payload: data
+  }),
+  updateCurrentCategoryQuestionIndex: data => ({
+    type: personalityTestActions.UPDATE_CURRENT_CATEGORY_INDEX,
     payload: data
   })
 };

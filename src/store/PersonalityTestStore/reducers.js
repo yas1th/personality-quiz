@@ -20,6 +20,18 @@ export const categories = (state = [], action) => {
   }
 };
 
+export const answers = (state = [], action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case personalityTestActions.UPDATE_ANSWER: {
+      return [...state, payload];
+    }
+
+    default:
+      return state;
+  }
+};
+
 export const isLoading = (state = false, action) => {
   const { type } = action;
   switch (type) {
@@ -29,6 +41,20 @@ export const isLoading = (state = false, action) => {
       return false;
     case personalityTestActions.FETCH_QUESTIONS_ERROR:
       return false;
+    default:
+      return state;
+  }
+};
+
+export const categoryCurrentQuestionIndex = (state = {}, action) => {
+  const { type, payload } = action;
+  console.log("reducer", payload);
+  switch (type) {
+    case personalityTestActions.UPDATE_CURRENT_CATEGORY_INDEX: {
+      const newstate = { ...state };
+      newstate[payload.categoryName] = payload.questionNum;
+      return newstate;
+    }
     default:
       return state;
   }

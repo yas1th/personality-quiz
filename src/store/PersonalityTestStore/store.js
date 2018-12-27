@@ -1,5 +1,7 @@
 export const personalityTestStore = {
   categories: [],
   questions: [],
-  isLoading: true
+  isLoading: true,
+  answers: [],
+  categoryCurrentQuestionIndex: {}
 };

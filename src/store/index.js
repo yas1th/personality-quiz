@@ -1,6 +1,6 @@
-import { personalityTestStore } from "./QuestionsStore/store";
-import * as questionsReducers from "./QuestionsStore/reducers";
-import { questionsSagas } from "./QuestionsStore/sagas";
+import { personalityTestStore } from "./PersonalityTestStore/store";
+import * as questionsReducers from "./PersonalityTestStore/reducers";
+import { questionsSagas } from "./PersonalityTestStore/sagas";
 import { all } from "redux-saga/effects";
 import createSagaMiddleware from "redux-saga";
 import { createStore, applyMiddleware, compose, combineReducers } from "redux";
