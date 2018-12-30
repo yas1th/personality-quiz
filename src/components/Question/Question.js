@@ -1,5 +1,6 @@
 import React from "react";
 import "../../App.css";
+import "./Question.css";
 
 export default class Question extends React.Component {
   constructor(props) {
@@ -47,31 +48,42 @@ export default class Question extends React.Component {
   render() {
     const { question } = this.props;
     return (
-      <div>
-        <div>{question.question}</div>
-        {question.questionType.options.map((option, index) => {
-          return (
-            <div key={index}>
-              <input
-                type="radio"
-                value={option}
-                onChange={e => {
-                  this.handleChangeOption(index, e.target.value);
-                }}
-                checked={this.state.selectedOption === index ? true : false}
-              />
-              <label>{option}</label>
+      <div className="question-main-div">
+        {question != null ? (
+          <div>
+            <h2 className="question">{question.question}</h2>
+            <div>
+              {question.questionType.options.map((option, index) => {
+                return (
+                  <div key={index} className="answerOptions">
+                    <input
+                      type="radio"
+                      value={option}
+                      className="radioBtn"
+                      onChange={e => {
+                        this.handleChangeOption(index, e.target.value);
+                      }}
+                      checked={
+                        this.state.selectedOption === index ? true : false
+                      }
+                    />
+                    <label className="radioBtnLabel">{option}</label>
+                  </div>
+                );
+              })}
             </div>
-          );
-        })}
-        <button
-          id="next"
-          disabled={this.state.disableNextBtn}
-          onClick={e => this.handleNextQuestion()}
-        >
-          Next
-        </button>
-        <div className="error-message">{this.state.errorMessage}</div>
+            <button
+              id="next"
+              disabled={this.state.disableNextBtn}
+              onClick={e => this.handleNextQuestion()}
+            >
+              Next
+            </button>
+            <div className="error-message">{this.state.errorMessage}</div>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     );
   }

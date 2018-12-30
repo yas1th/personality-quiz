@@ -5,6 +5,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { personalityTestActionCreators } from "../store/PersonalityTestStore/actions";
 import LoadingBar from "../components/LoadingBar/LoadingBar";
+import completedIcon from "../assets/completed.png";
 
 class _PersonalityTest extends Component {
   constructor(props) {
@@ -28,14 +29,22 @@ class _PersonalityTest extends Component {
       categoryIndex: index
     });
   };
-  nextcategory = () => {
+  nextcategory = prevCategoryName => {
     let curCategoryIndex = this.state.categoryIndex + 1;
     if (curCategoryIndex <= this.props.categories.length - 1) {
       this.setState({
         categoryIndex: curCategoryIndex
       });
+      this.props.updateCurrentCategoryQuestionIndex({
+        categoryName: prevCategoryName,
+        questionNum: -1
+      });
     } else {
       this.setState({ categoryIndex: 0 });
+      this.props.updateCurrentCategoryQuestionIndex({
+        categoryName: prevCategoryName,
+        questionNum: -1
+      });
     }
   };
   render() {
@@ -64,6 +73,17 @@ class _PersonalityTest extends Component {
                       key={category.categoryName}
                       onClick={e => this.changeCategory(index, curCategory)}
                     >
+                      <span
+                        className={
+                          this.props.categoryCurrentQuestionIndex[
+                            category.categoryName
+                          ] === -1
+                            ? "display"
+                            : "hide"
+                        }
+                      >
+                        <img src={completedIcon} alt={"category completed"} />
+                      </span>
                       <span>{category.categoryName}</span>
                     </li>
                   );

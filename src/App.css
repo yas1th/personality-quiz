@@ -2,6 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Sans-serief";
+  background-color: #eee;
 }
 .wrapper {
   padding: 0 60px;

@@ -29,7 +29,8 @@ export default class Questions extends React.Component {
     this.setState({ questionNum: nextQuestionNum });
     if (nextQuestionNum > this.props.questions.length - 1) {
       // this.setState({ questionNum: 0, disableNextBtn: true });
-      this.props.nextSection();
+      let categoryName = this.props.questions[nextQuestionNum - 1].category;
+      this.props.nextSection(categoryName);
     }
   };
   render() {
@@ -37,7 +38,7 @@ export default class Questions extends React.Component {
     console.log("questions", this.props.questionNum);
     return (
       <div>
-        {this.state.questionNum <= questions.length - 1 ? (
+        {questions && this.state.questionNum !== -1 ? (
           <div>
             <Question
               question={questions[this.state.questionNum]}
@@ -46,7 +47,7 @@ export default class Questions extends React.Component {
             />
           </div>
         ) : (
-          ""
+          "You have completed this category, choose another category !!"
         )}
       </div>
     );

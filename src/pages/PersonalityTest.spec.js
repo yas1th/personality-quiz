@@ -1,11 +1,8 @@
 import React from "react";
-import { configure, shallow } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import { shallow } from "enzyme";
 import { PersonalityTest } from "./PersonalityTest";
 import { Questions } from "../components/Questions/Questions";
 import data from "../personality_test";
-
-configure({ adapter: new Adapter() });
 
 describe("<PersonalityTest />", () => {
   let wrapper;

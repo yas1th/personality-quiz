@@ -1,0 +1,25 @@
+.question {
+  /* padding: 10px; */
+}
+.answerOptions {
+  padding-bottom: 10px;
+}
+.radioBtn {
+  cursor: pointer;
+}
+
+#next {
+  border-radius: 3px;
+  border: none;
+  outline: none;
+  background-color: cornflowerblue;
+  color: #fff;
+  padding: 10px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.question-main-div {
+  padding-left: 50px;
+  padding-bottom: 20px;
+}
