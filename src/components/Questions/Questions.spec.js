@@ -8,7 +8,7 @@ describe("<Questions />", () => {
   beforeEach(() => {
     wrapper = shallow(<Questions />);
   });
-  it("if there are no questions passed it should not render", () => {
+  it("it should not render if there are no questions passed ", () => {
     expect(wrapper.find(Question)).toHaveLength(0);
   });
 });

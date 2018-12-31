@@ -11,16 +11,8 @@ describe("<PersonalityTest />", () => {
       <PersonalityTest fetchCategories={() => {}} fetchQuestions={() => {}} />
     );
   });
-  it("should not render if there are no categories and questions", () => {
+  it("it should not render if there are no categories and questions", () => {
     const ul = <ul className="categories-list" />;
     expect(wrapper.contains(ul)).toBe(false);
   });
-  // it("should render if there are categories and questions", () => {
-  //   wrapper.setProps({
-  //     categories: data.categories,
-  //     questions: data.questions
-  //   });
-  //   const ul = <ul className="categories-list" />;
-  //   expect(wrapper.find(Questions)).toBe(true);
-  // });
 });

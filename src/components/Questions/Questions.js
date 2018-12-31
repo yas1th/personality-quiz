@@ -47,7 +47,11 @@ export default class Questions extends React.Component {
             />
           </div>
         ) : (
-          "You have completed this category, choose another category !!"
+          <div className="completed-category">
+            <h2>
+              {"You have completed this category, choose another category !!"}
+            </h2>
+          </div>
         )}
       </div>
     );
