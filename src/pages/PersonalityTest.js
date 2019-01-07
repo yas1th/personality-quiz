@@ -98,8 +98,12 @@ class _PersonalityTest extends Component {
                 questions={questions.filter(
                   question => question.category === categoryName
                 )}
+                catCurQstnIndex={this.props.categoryCurrentQuestionIndex}
                 nextSection={this.nextcategory}
+                categoryCount={this.props.categories.length}
+                updateAnswers={this.props.updateAnswers}
                 updateAnswer={this.props.updateAnswer}
+                answers={this.props.answers}
                 questionNum={
                   this.props.categoryCurrentQuestionIndex[categoryName]
                     ? this.props.categoryCurrentQuestionIndex[categoryName]
@@ -118,11 +122,17 @@ class _PersonalityTest extends Component {
 }
 
 const mapStateToProps = state => {
-  const { categories, questions, categoryCurrentQuestionIndex } = state;
+  const {
+    categories,
+    questions,
+    categoryCurrentQuestionIndex,
+    answers
+  } = state;
   return {
     categories,
     questions,
-    categoryCurrentQuestionIndex
+    categoryCurrentQuestionIndex,
+    answers
   };
 };
 

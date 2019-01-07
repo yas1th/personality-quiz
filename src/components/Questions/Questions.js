@@ -33,9 +33,28 @@ export default class Questions extends React.Component {
       this.props.nextSection(categoryName);
     }
   };
+  checkToDisplaySubmit = () => {
+    if (this.state.questionNum === this.props.questions.length - 1) {
+      let vals = Object.values(this.props.catCurQstnIndex);
+      console.log("valss***********", vals);
+      let counter = 0;
+      for (let i = 0; i < vals.length; i++) {
+        if (vals[i] === -1) counter++;
+      }
+      if (counter === this.props.categoryCount - 1) {
+        return true;
+      }
+    }
+    return false;
+  };
   render() {
     const { questions } = this.props;
-    console.log("questions", this.props.questionNum);
+    console.log(
+      "questions",
+      this.state.questionNum,
+      this.props.questions.length - 1
+    );
+
     return (
       <div>
         {questions && this.state.questionNum !== -1 ? (
@@ -44,6 +63,9 @@ export default class Questions extends React.Component {
               question={questions[this.state.questionNum]}
               increaseQuestionNumber={this.increaseQuestionNumber}
               updateAnswer={this.props.updateAnswer}
+              submit={this.checkToDisplaySubmit()}
+              updateAnswers={this.props.updateAnswers}
+              answers={this.props.answers}
             />
           </div>
         ) : (

@@ -7,6 +7,7 @@ const URL = "mongodb://localhost:27017/personalityTest";
 const mongoose = require("mongoose");
 const categoryModel = require("./models/categories");
 const questionModel = require("./models/questions");
+const answerModel = require("./models/answers");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -22,6 +23,33 @@ route.get("/questions", (req, res) => {
   questionModel.find({}).then(question => {
     res.json(question);
   });
+});
+
+route.post("/answers", (req, res) => {
+  console.log("request is", req.body);
+  // const answers = new answerModel({
+  //   ...req.body
+  // });
+  req.body.map(function(answer) {
+    console.log("answer is", answer);
+    const answers = new answerModel({
+      ...answer
+    });
+    answers.save(function(err, answer) {
+      if (err) {
+        console.log("saving the answers error", err);
+      } else {
+        console.log("answers has been saved");
+      }
+    });
+  });
+  // answers.save(function(err, answer) {
+  //   if (err) {
+  //     console.log("saving the answers error", err);
+  //   } else {
+  //     console.log("answers has been saved");
+  //   }
+  // });
 });
 
 mongoose.connect(

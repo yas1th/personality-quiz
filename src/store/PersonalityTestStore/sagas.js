@@ -46,7 +46,24 @@ function* getPersonalityTestCategories(action) {
   }
 }
 
+function* watchSaveAnswers() {
+  yield takeEvery(personalityTestActions.UPDATE_ANSWERS, saveAnswers);
+}
+
+function* saveAnswers(action) {
+  try {
+    const response = yield call(API.post, `answers`, action.payload);
+    yield put({
+      type: personalityTestActions.UPDATE_ANSWERS_SUCCESS,
+      payload: response
+    });
+  } catch (error) {
+    yield put({ type: personalityTestActions.UPDATE_ANSWERS_ERROR });
+  }
+}
+
 export const questionsSagas = [
   watchPersonalityTestQuestions(),
-  watchPersonalityTestCtegories()
+  watchPersonalityTestCtegories(),
+  watchSaveAnswers()
 ];

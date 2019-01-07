@@ -76,7 +76,16 @@ export default class Question extends React.Component {
       answer: [this.state.answer, this.state.rangeSelector]
     });
   };
-
+  handleSubmit = () => {
+    if (this.state.selectedOption !== -1) {
+      this.props.increaseQuestionNumber();
+      this.props.updateAnswers(this.props.answers);
+    } else {
+      this.setState({
+        errorMessage: "you must answer this question"
+      });
+    }
+  };
   handleChangeOption = (index, value) => {
     if (this.props.question.questionType.type === "single_choice_conditional") {
       console.log("cond", value);
@@ -166,13 +175,23 @@ export default class Question extends React.Component {
                   ) : null}
                 </>
               ) : null}
-              <button
-                id="next"
-                disabled={this.state.disableNextBtn}
-                onClick={e => this.handleNextQuestion()}
-              >
-                Next
-              </button>
+              {this.props.submit ? (
+                <button
+                  id="next"
+                  disabled={this.state.disableNextBtn}
+                  onClick={e => this.handleSubmit()}
+                >
+                  SUBMIT
+                </button>
+              ) : (
+                <button
+                  id="next"
+                  disabled={this.state.disableNextBtn}
+                  onClick={e => this.handleNextQuestion()}
+                >
+                  NEXT
+                </button>
+              )}
             </div>
 
             <div className="error-message">{this.state.errorMessage}</div>
