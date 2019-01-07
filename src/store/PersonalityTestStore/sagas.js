@@ -58,7 +58,10 @@ function* saveAnswers(action) {
       payload: response
     });
   } catch (error) {
-    yield put({ type: personalityTestActions.UPDATE_ANSWERS_ERROR });
+    yield put({
+      type: personalityTestActions.UPDATE_ANSWERS_ERROR,
+      payload: "SOMETHING WENT WRONG PLEASE TRY AGAIN LATER!!"
+    });
   }
 }
 

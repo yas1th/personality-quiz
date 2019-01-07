@@ -3,5 +3,6 @@ export const personalityTestStore = {
   questions: [],
   isLoading: true,
   answers: [],
-  categoryCurrentQuestionIndex: {}
+  categoryCurrentQuestionIndex: {},
+  isTestCompleted: true
 };

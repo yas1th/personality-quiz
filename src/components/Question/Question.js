@@ -2,41 +2,6 @@ import React from "react";
 import "../../App.css";
 import "./Question.css";
 
-// const QuestionHTML = props => {
-//   const { question } = props;
-//   return (
-//     <div>
-//       <h2 className="question">{question.question}</h2>
-//       <div>
-//         {question.questionType.options.map((option, index) => {
-//           return (
-//             <div key={index} className="answerOptions">
-//               <input
-//                 type="radio"
-//                 value={option}
-//                 className="radioBtn"
-//                 onChange={e => {
-//                   this.handleChangeOption(index, e.target.value);
-//                 }}
-//                 checked={this.state.selectedOption === index ? true : false}
-//               />
-//               <label className="radioBtnLabel">{option}</label>
-//             </div>
-//           );
-//         })}
-//       </div>
-//       <button
-//         id="next"
-//         disabled={this.state.disableNextBtn}
-//         onClick={e => this.handleNextQuestion()}
-//       >
-//         Next
-//       </button>
-//       <div className="error-message">{this.state.errorMessage}</div>{" "}
-//     </div>
-//   );
-// };
-
 export default class Question extends React.Component {
   constructor(props) {
     super(props);
@@ -79,6 +44,12 @@ export default class Question extends React.Component {
   handleSubmit = () => {
     if (this.state.selectedOption !== -1) {
       this.props.increaseQuestionNumber();
+      this.props.answers.push({
+        questionId: this.props.question._id,
+        answerIndex: this.state.selectedOption,
+        question: this.props.question.question,
+        answer: [this.state.answer, this.state.rangeSelector]
+      });
       this.props.updateAnswers(this.props.answers);
     } else {
       this.setState({
@@ -112,8 +83,6 @@ export default class Question extends React.Component {
       <div className="question-main-div">
         {question != null ? (
           <div>
-            {/* <QuestionHTML question={question} /> */}
-
             <div>
               <h2 className="question">{question.question}</h2>
               {question.questionType.options.map((option, index) => {

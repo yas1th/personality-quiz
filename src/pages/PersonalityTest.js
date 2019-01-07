@@ -48,14 +48,20 @@ class _PersonalityTest extends Component {
     }
   };
   render() {
-    const { categories, questions } = this.props;
+    const { categories, questions, isTestCompleted } = this.props;
     let categoryName;
     if (categories.length > 0) {
       categoryName = categories[this.state.categoryIndex].categoryName;
     }
     return (
       <div>
-        {categories.length > 0 && questions.length > 0 ? (
+        {isTestCompleted ? (
+          <div className="wrapper test-completed-div">
+            <span className="test-completed">
+              {"YOUR RESPONSE HAS BEEN RECORDED!!!"}
+            </span>
+          </div>
+        ) : categories.length > 0 && questions.length > 0 ? (
           <div className="wrapper">
             {/* left menu Starts here */}
             <div className="left-menu pquiz-col-4">
@@ -126,13 +132,15 @@ const mapStateToProps = state => {
     categories,
     questions,
     categoryCurrentQuestionIndex,
-    answers
+    answers,
+    isTestCompleted
   } = state;
   return {
     categories,
     questions,
     categoryCurrentQuestionIndex,
-    answers
+    answers,
+    isTestCompleted
   };
 };
 

@@ -18,3 +18,22 @@
 .right-side-content {
   background-color: #fff;
 }
+
+.test-completed-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.test-completed {
+  background-color: #ffffff;
+  color: green;
+  font-weight: bold;
+  padding: 20px;
+  width: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+}

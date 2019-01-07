@@ -27,9 +27,6 @@ route.get("/questions", (req, res) => {
 
 route.post("/answers", (req, res) => {
   console.log("request is", req.body);
-  // const answers = new answerModel({
-  //   ...req.body
-  // });
   req.body.map(function(answer) {
     console.log("answer is", answer);
     const answers = new answerModel({
@@ -43,13 +40,7 @@ route.post("/answers", (req, res) => {
       }
     });
   });
-  // answers.save(function(err, answer) {
-  //   if (err) {
-  //     console.log("saving the answers error", err);
-  //   } else {
-  //     console.log("answers has been saved");
-  //   }
-  // });
+  res.sendStatus(200);
 });
 
 mongoose.connect(

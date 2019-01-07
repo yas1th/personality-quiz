@@ -9,6 +9,8 @@ mongoose.connect(
   (err, db) => {
     if (err) {
       console.log("database connection failed", err);
+    } else {
+      console.log("database connection established");
     }
   }
 );
@@ -18,7 +20,14 @@ categories.map(category => {
   const categoryCollection = new categoryModel({
     categoryName: category
   });
-  categoryCollection.save();
+  categoryCollection
+    .save()
+    .then(categoriesCollection => {
+      console.log("categories are successfully saved to the database");
+    })
+    .catch(err => {
+      console.log("unable to save the categories to the database");
+    });
 });
 
 const questions = personalityTestData.questions;
@@ -28,5 +37,12 @@ questions.map(question => {
     category: question.category,
     questionType: question.question_type
   });
-  questionCollection.save();
+  questionCollection
+    .save()
+    .then(questionsCollection => {
+      console.log("Questions are successfully saved to the database");
+    })
+    .catch(err => {
+      console.log("unable to save the questions to the database");
+    });
 });

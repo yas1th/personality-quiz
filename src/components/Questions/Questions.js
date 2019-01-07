@@ -28,7 +28,6 @@ export default class Questions extends React.Component {
     let nextQuestionNum = this.state.questionNum + 1;
     this.setState({ questionNum: nextQuestionNum });
     if (nextQuestionNum > this.props.questions.length - 1) {
-      // this.setState({ questionNum: 0, disableNextBtn: true });
       let categoryName = this.props.questions[nextQuestionNum - 1].category;
       this.props.nextSection(categoryName);
     }
@@ -36,7 +35,6 @@ export default class Questions extends React.Component {
   checkToDisplaySubmit = () => {
     if (this.state.questionNum === this.props.questions.length - 1) {
       let vals = Object.values(this.props.catCurQstnIndex);
-      console.log("valss***********", vals);
       let counter = 0;
       for (let i = 0; i < vals.length; i++) {
         if (vals[i] === -1) counter++;
@@ -49,12 +47,6 @@ export default class Questions extends React.Component {
   };
   render() {
     const { questions } = this.props;
-    console.log(
-      "questions",
-      this.state.questionNum,
-      this.props.questions.length - 1
-    );
-
     return (
       <div>
         {questions && this.state.questionNum !== -1 ? (
