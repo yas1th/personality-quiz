@@ -26,6 +26,7 @@ export const answers = (state = [], action) => {
     case personalityTestActions.UPDATE_ANSWER: {
       return [...state, payload];
     }
+
     default:
       return state;
   }

@@ -1,8 +1,11 @@
 import React from "react";
 import "../../App.css";
 import "./Question.css";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { personalityTestActionCreators } from "../../store/PersonalityTestStore/actions";
 
-export default class Question extends React.Component {
+class _Question extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,6 +22,23 @@ export default class Question extends React.Component {
       this.setState({ errorMessage: null, selectedOption: -1 });
     }
   }
+
+  handleSubmit = () => {
+    if (this.state.selectedOption !== -1) {
+      this.props.increaseQuestionNumber();
+      this.props.answers.push({
+        questionId: this.props.question._id,
+        answerIndex: this.state.selectedOption,
+        question: this.props.question.question,
+        answer: [this.state.answer, this.state.rangeSelector]
+      });
+      this.props.updateAnswers(this.props.answers);
+    } else {
+      this.setState({
+        errorMessage: "you must answer this question"
+      });
+    }
+  };
 
   handleNextQuestion = () => {
     if (this.state.selectedOption !== -1) {
@@ -41,25 +61,9 @@ export default class Question extends React.Component {
       answer: [this.state.answer, this.state.rangeSelector]
     });
   };
-  handleSubmit = () => {
-    if (this.state.selectedOption !== -1) {
-      this.props.increaseQuestionNumber();
-      this.props.answers.push({
-        questionId: this.props.question._id,
-        answerIndex: this.state.selectedOption,
-        question: this.props.question.question,
-        answer: [this.state.answer, this.state.rangeSelector]
-      });
-      this.props.updateAnswers(this.props.answers);
-    } else {
-      this.setState({
-        errorMessage: "you must answer this question"
-      });
-    }
-  };
+
   handleChangeOption = (index, value) => {
     if (this.props.question.questionType.type === "single_choice_conditional") {
-      console.log("cond", value);
       if (
         value ===
         this.props.question.questionType.condition.predicate.exactEquals[1]
@@ -77,7 +81,6 @@ export default class Question extends React.Component {
     });
   };
   render() {
-    console.log(this.state.showConditionalQuestion);
     const { question } = this.props;
     return (
       <div className="question-main-div">
@@ -172,3 +175,18 @@ export default class Question extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  const { answers } = state;
+  return {
+    answers
+  };
+};
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ ...personalityTestActionCreators }, dispatch);
+
+export const Question = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(_Question);

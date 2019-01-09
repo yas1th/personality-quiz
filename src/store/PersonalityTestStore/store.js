@@ -4,5 +4,5 @@ export const personalityTestStore = {
   isLoading: true,
   answers: [],
   categoryCurrentQuestionIndex: {},
-  isTestCompleted: true
+  isTestCompleted: false
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import "../../App.css";
 import "./Questions.css";
-import Question from "../Question/Question";
+import { Question } from "../Question/Question";
 
 export default class Questions extends React.Component {
   constructor(props) {
@@ -54,10 +54,7 @@ export default class Questions extends React.Component {
             <Question
               question={questions[this.state.questionNum]}
               increaseQuestionNumber={this.increaseQuestionNumber}
-              updateAnswer={this.props.updateAnswer}
               submit={this.checkToDisplaySubmit()}
-              updateAnswers={this.props.updateAnswers}
-              answers={this.props.answers}
             />
           </div>
         ) : (

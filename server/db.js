@@ -16,6 +16,7 @@ mongoose.connect(
 );
 
 const categories = personalityTestData.categories;
+
 categories.map(category => {
   const categoryCollection = new categoryModel({
     categoryName: category
@@ -31,6 +32,7 @@ categories.map(category => {
 });
 
 const questions = personalityTestData.questions;
+
 questions.map(question => {
   const questionCollection = new questionModel({
     question: question.question,
