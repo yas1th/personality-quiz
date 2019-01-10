@@ -1,8 +1,14 @@
-const URL = "mongodb://localhost:27017/personalityTest";
+/**
+ * This file will insert the data to the database by reading the given input ('./data/personality_test.js')
+ */
+
+const URL = "mongodb://localhost:27017/personalityTest"; // database name is personalityTest
 const mongoose = require("mongoose");
-const categoryModel = require("./models/categories");
-const questionModel = require("./models/questions");
-const personalityTestData = require("./data/personality_test");
+const categoryModel = require("./models/categories"); // categories model
+const questionModel = require("./models/questions"); // questions model
+const personalityTestData = require("./data/personality_test"); //input
+
+// Connecting to the database using Mongoose ORM
 
 mongoose.connect(
   URL,
@@ -15,8 +21,12 @@ mongoose.connect(
   }
 );
 
+// Reading the categories data from the input
+
 const categories = personalityTestData.categories;
+// counter to know whether the data is completely inserted in to the database
 let categoryCounter = 0;
+
 categories.map(category => {
   const categoryCollection = new categoryModel({
     categoryName: category
@@ -34,8 +44,9 @@ categories.map(category => {
       console.log("unable to save the categories to the database");
     });
 });
-
+// Reading the Quesstions data from the input
 const questions = personalityTestData.questions;
+// counter to know whether the data is completely inserted in to the database
 let questionsCounter = 0;
 questions.map(question => {
   const questionCollection = new questionModel({

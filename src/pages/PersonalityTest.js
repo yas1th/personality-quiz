@@ -19,6 +19,11 @@ class _PersonalityTest extends Component {
     this.props.fetchCategories();
     this.props.fetchQuestions();
   }
+
+  // suppose if user clicks on the any other category then need to change the category and perserve the
+  // current category question index so that will display the un-answered questions only when the user
+  // re-visits the category again
+
   changeCategory = (index, prevCategory) => {
     const prevCategoryQstnIndex = this.child.current.getQstnNumber();
     this.props.updateCurrentCategoryQuestionIndex({
@@ -29,6 +34,10 @@ class _PersonalityTest extends Component {
       categoryIndex: index
     });
   };
+
+  // if the user has successfully completed all the questions from the category then need to take
+  // the user to the next category
+
   nextcategory = prevCategoryName => {
     let curCategoryIndex = this.state.categoryIndex + 1;
     if (curCategoryIndex <= this.props.categories.length - 1) {

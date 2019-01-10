@@ -23,6 +23,8 @@ class _Question extends React.Component {
     }
   }
 
+  // submitting the answers to the backend
+
   handleSubmit = () => {
     if (this.state.selectedOption !== -1) {
       this.props.increaseQuestionNumber();
@@ -34,11 +36,14 @@ class _Question extends React.Component {
       });
       this.props.updateAnswers(this.props.answers);
     } else {
+      // checking whether user selected atleast one option
       this.setState({
         errorMessage: "you must answer this question"
       });
     }
   };
+
+  // To display the next question
 
   handleNextQuestion = () => {
     if (this.state.selectedOption !== -1) {
@@ -50,6 +55,7 @@ class _Question extends React.Component {
       });
       this.props.increaseQuestionNumber();
     } else {
+      // checking whether user selected atleast one option
       this.setState({
         errorMessage: "you must answer this question"
       });
@@ -61,6 +67,10 @@ class _Question extends React.Component {
       answer: [this.state.answer, this.state.rangeSelector]
     });
   };
+
+  // suppose if a question is conditional question then need to check the
+  // selected answer from the user matches with the predicate if it matches
+  // displaying the predicate question
 
   handleChangeOption = (index, value) => {
     if (this.props.question.questionType.type === "single_choice_conditional") {

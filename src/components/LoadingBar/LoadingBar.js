@@ -1,3 +1,8 @@
+/**
+ * If there is any delay in receiving the response from the backend due to poor network...
+ * Displaying the loading bar
+ */
+
 import React from "react";
 import "./LoadingBar.css";
 
