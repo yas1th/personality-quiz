@@ -70,7 +70,9 @@ class _Question extends React.Component {
       ) {
         this.setState({
           showConditionalQuestion: this.props.question.questionType.condition
-            .if_positive
+            .if_positive,
+          rangeSelector: this.props.question.questionType.condition.if_positive
+            .question_type.range.from
         });
       }
     }
@@ -129,6 +131,10 @@ class _Question extends React.Component {
                         max={
                           this.state.showConditionalQuestion.question_type.range
                             .to
+                        }
+                        value={
+                          this.state.showConditionalQuestion.question_type.range
+                            .from
                         }
                         onChange={e => {
                           this.setState({ rangeSelector: e.target.value });

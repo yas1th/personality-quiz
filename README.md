@@ -1,7 +1,7 @@
 # personality-test
 
 1. git clone <repo>
-2. Run MongoDB in 27017 port and mongo server
+2. Run MongoDB in 27017 port
 3. cd server
 4. npm install or yarn install --- It will install the dependencies required for server code
 5. node db.js --- It will read the json file and create the database in mongodb

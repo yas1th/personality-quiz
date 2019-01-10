@@ -16,7 +16,7 @@ mongoose.connect(
 );
 
 const categories = personalityTestData.categories;
-
+let categoryCounter = 0;
 categories.map(category => {
   const categoryCollection = new categoryModel({
     categoryName: category
@@ -25,6 +25,10 @@ categories.map(category => {
     .save()
     .then(categoriesCollection => {
       console.log("categories are successfully saved to the database");
+      if (categoryCounter === categories.length - 1) {
+        console.log("Finished saving the categories to the database");
+      }
+      categoryCounter++;
     })
     .catch(err => {
       console.log("unable to save the categories to the database");
@@ -32,7 +36,7 @@ categories.map(category => {
 });
 
 const questions = personalityTestData.questions;
-
+let questionsCounter = 0;
 questions.map(question => {
   const questionCollection = new questionModel({
     question: question.question,
@@ -43,6 +47,10 @@ questions.map(question => {
     .save()
     .then(questionsCollection => {
       console.log("Questions are successfully saved to the database");
+      if (questionsCounter === questions.length - 1) {
+        console.log("Finished saving the questions to the database");
+      }
+      questionsCounter++;
     })
     .catch(err => {
       console.log("unable to save the questions to the database");
