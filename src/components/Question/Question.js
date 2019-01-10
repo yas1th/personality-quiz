@@ -142,7 +142,7 @@ class _Question extends React.Component {
                           this.state.showConditionalQuestion.question_type.range
                             .to
                         }
-                        value={
+                        defaultValue={
                           this.state.showConditionalQuestion.question_type.range
                             .from
                         }
